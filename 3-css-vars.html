@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Scoped CSS Variables and JS</title>
+</head>
+<body>
+  <h2>Update CSS Variables with <span class='hl'>JS</span></h2>
+
+  <div class="image-modify">
+    <div class="controls">
+      <label for="spacing">Spacing:</label>
+      <input id="spacing" type="range" name="spacing" min="10" max="200" value="10" data-sizing="px">
+
+      <label for="blur">Blur:</label>
+      <input id="blur" type="range" name="blur" min="0" max="25" value="10" data-sizing="px">
+
+      <label for="base">Base Color</label>
+      <input id="base" type="color" name="base" value="#ffc600">
+    </div>
+    <img src="https://source.unsplash.com/Ovn1hyBge38/800x500">
+  </div>
+
+  <style>
+
+    .image-modify {
+      --base: #ffc600;
+      --spacing: 10px;
+      --blur: 10px;
+    }
+
+    .image-modify img {
+      padding: var(--spacing);
+      background: var(--base);
+      filter: blur(var(--blur)); /* Filter Functions don't play well with IE, and url() no worky with Edge...*/
+    }
+
+    /*
+      misc styles, nothing to do with CSS variables
+    */
+
+    body {
+      text-align: center;
+    }
+
+    body {
+      background: #193549;
+      color: white;
+      font-family: 'helvetica neue', sans-serif;
+      font-weight: 100;
+      font-size: 50px;
+    }
+
+    .controls {
+      margin-bottom: 50px;
+    }
+
+    input {
+      width:100px;
+    }
+
+  </style>
+
+  <script>
+    const inputs = document.querySelectorAll('.controls input');
+    const imageEditor = document.querySelector('.image-modify img');
+    let filterSelected = false;
+
+    function handleUpdate() {
+      console.log('changing...')
+      const units = this.dataset.sizing || '';
+      imageEditor.style.setProperty(`--${this.name}`, this.value + units);
+    }
+
+    inputs.forEach( input => input.addEventListener('mousedown', (e) => {
+        e.target.addEventListener('mousemove', handleUpdate);
+        e.target.addEventListener('change', handleUpdate); // Ideally would want to separate out the color picker from the slider due to differences in actions.
+      } 
+    ));
+
+    inputs.forEach( input => input.addEventListener('mouseup', (e) => {
+        e.target.removeEventListener('mousemove', handleUpdate);
+      } 
+    ));
+
+  </script>
+
+</body>
+</html>
