@@ -5,3 +5,4 @@
 - https://jordan-carney.github.io/js30/reference-vs-copy.html
 - https://jordan-carney.github.io/js30/shift-select-checkboxes.html
 - https://jordan-carney.github.io/js30/slide-in-on-scroll.html
+- https://jordan-carney.github.io/js30/sort-without-articles.html
