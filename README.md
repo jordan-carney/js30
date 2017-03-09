@@ -8,3 +8,4 @@
 - https://jordan-carney.github.io/js30/sort-without-articles.html 
 - https://jordan-carney.github.io/js30/css-text-shadow-mouse-move.html
 - https://jordan-carney.github.io/js30/html5-video-player.html
+- https://jordan-carney.github.io/js30/event-capture-prop-bubble-once.html 
